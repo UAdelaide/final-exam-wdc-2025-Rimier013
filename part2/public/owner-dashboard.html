@@ -100,7 +100,9 @@
         async function loadDogs() {
           try {
             const res = await fetch('/api/users/mydogs', { credentials: 'include' });
-            if 
+            if (res.ok) {
+              myDogs.value = await res.json();
+            }
           }
         }
 
