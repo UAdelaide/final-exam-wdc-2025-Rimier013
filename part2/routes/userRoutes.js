@@ -56,7 +56,7 @@ router.get('/me', (req, res) => {
 // });
 
 // POST login (with session and role-based response)
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   const { username, password } = req.body; // frontend posts username/password
 
   try {
