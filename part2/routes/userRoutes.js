@@ -56,31 +56,31 @@ router.get('/me', (req, res) => {
 // });
 
 // POST login (with session and role-based response)
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body; // frontend posts username/password
+// router.post('/login', async (req, res) => {
+//   const { username, password } = req.body; // frontend posts username/password
 
-  try {
-    const [rows] = await db.query(`
-      SELECT user_id, username, role FROM Users
-      WHERE username = ? AND password_hash = ?
-    `, [username, password]);
+//   try {
+//     const [rows] = await db.query(`
+//       SELECT user_id, username, role FROM Users
+//       WHERE username = ? AND password_hash = ?
+//     `, [username, password]);
 
-    if (rows.length === 0) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
+//     if (rows.length === 0) {
+//       return res.status(401).json({ message: 'Invalid username or password' });
+//     }
 
-    // Save user info to session
-    req.session.user = {
-      user_id: rows[0].user_id,
-      username: rows[0].username,
-      role: rows[0].role
-    };
+//     // Save user info to session
+//     req.session.user = {
+//       user_id: rows[0].user_id,
+//       username: rows[0].username,
+//       role: rows[0].role
+//     };
 
-    // Respond with role for frontend redirection
-    res.json({ role: rows[0].role });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+//     // Respond with role for frontend redirection
+//     res.json({ role: rows[0].role });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// });
 
 module.exports = router;
