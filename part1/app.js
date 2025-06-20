@@ -42,11 +42,11 @@ async function insertTestData() {
     // Walk requests
     await conn.query(`
       INSERT IGNORE INTO walkrequests (dog_id, requested_time, duration_minutes, location, status) VALUES
-      ((SELECT dog_id FROM dogs WHERE name='Max' AND owner_id=(SELECT user_id FROM users WHERE username='alice123')), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
-      ((SELECT dog_id FROM dogs WHERE name='Bella' AND owner_id=(SELECT user_id FROM users WHERE username='carol123')), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
-      ((SELECT dog_id FROM dogs WHERE name='Charlie' AND owner_id=(SELECT user_id FROM users WHERE username='alice123')), '2025-06-11 15:00:00', 60, 'City Park', 'open'),
-      ((SELECT dog_id FROM dogs WHERE name='Daisy' AND owner_id=(SELECT user_id FROM users WHERE username='eveowner')), '2025-06-12 10:15:00', 20, 'Riverwalk', 'open'),
-      ((SELECT dog_id FROM dogs WHERE name='Rocky' AND owner_id=(SELECT user_id FROM users WHERE username='carol123')), '2025-06-12 17:30:00', 40, 'Downtown Plaza', 'open')
+      ((SELECT dog_id FROM dogs WHERE name='Max' AND owner_id=(SELECT user_id FROM Users WHERE username='alice123')), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
+      ((SELECT dog_id FROM dogs WHERE name='Bella' AND owner_id=(SELECT user_id FROM Users WHERE username='carol123')), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
+      ((SELECT dog_id FROM dogs WHERE name='Charlie' AND owner_id=(SELECT user_id FROM Users WHERE username='alice123')), '2025-06-11 15:00:00', 60, 'City Park', 'open'),
+      ((SELECT dog_id FROM dogs WHERE name='Daisy' AND owner_id=(SELECT user_id FROM Users WHERE username='eveowner')), '2025-06-12 10:15:00', 20, 'Riverwalk', 'open'),
+      ((SELECT dog_id FROM dogs WHERE name='Rocky' AND owner_id=(SELECT user_id FROM Users WHERE username='carol123')), '2025-06-12 17:30:00', 40, 'Downtown Plaza', 'open')
     `);
 
     // WalkRatings (for /api/walkers/summary testing)
