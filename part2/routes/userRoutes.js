@@ -59,7 +59,7 @@ router.get('/me', (req, res) => {
 router.post('/login', async (req, res) => {
   const { username, password } = req.body; // frontend posts username/password
 
-  console.log(username, password);
+  console.log('login request', username, password);
 
   try {
     const [rows] = await db.query(`
