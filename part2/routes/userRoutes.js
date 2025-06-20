@@ -55,4 +55,29 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// routes/userRoutes.js
+
+const express = require('express');
+const router = express.Router();
+const db = require('../models/db');
+
+// Login route
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await db.getUserByUsernameAndPassword(username, password);
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+    // Save user info to session
+    req.session.user = { id: user.user_id, username: user.username, role: user.role };
+    res.json({ role: user.role });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+
 module.exports = router;
