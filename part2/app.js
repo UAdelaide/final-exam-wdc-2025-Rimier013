@@ -15,7 +15,6 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: false
 }));
-app.use(express.json());
 
 // Routes
 const walkRoutes = require('./routes/walkRoutes');
