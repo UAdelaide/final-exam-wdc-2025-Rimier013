@@ -51,7 +51,7 @@ async function insertTestData() {
 
     // WalkRatings (for /api/walkers/summary testing)
     await conn.query(`
-      INSERT IGNORE INTO walkratings (request_id, walker_id, owner_id, rating, comments, rated_at) VALUES
+      INSERT IGNORE INTO WalkRatings (request_id, walker_id, owner_id, rating, comments, rated_at) VALUES
       (2, (SELECT user_id FROM Users WHERE username='bobwalker'), (SELECT user_id FROM Users WHERE username='carol123'), 5, 'Great job!', '2025-06-10 11:00:00'),
       (1, (SELECT user_id FROM Users WHERE username='bobwalker'), (SELECT user_id FROM Users WHERE username='alice123'), 4, 'Nice walk', '2025-06-10 09:00:00')
     `);
@@ -107,7 +107,7 @@ app.get('/api/walkers/summary', async (req, res) => {
             AND wq.accepted_walker_id = u.user_id
         ) AS completed_walks
       FROM Users u
-      LEFT JOIN walkratings wr ON u.user_id = wr.walker_id
+      LEFT JOIN WalkRatings wr ON u.user_id = wr.walker_id
       WHERE u.role = 'walker'
       GROUP BY u.user_id
     `);
