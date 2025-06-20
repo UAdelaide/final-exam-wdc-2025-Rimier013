@@ -41,7 +41,7 @@ async function insertTestData() {
 
     // Walk requests
     await conn.query(`
-      INSERT IGNORE INTO walkrequests (dog_id, requested_time, duration_minutes, location, status) VALUES
+      INSERT IGNORE INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status) VALUES
       ((SELECT dog_id FROM Dogs WHERE name='Max' AND owner_id=(SELECT user_id FROM Users WHERE username='alice123')), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
       ((SELECT dog_id FROM Dogs WHERE name='Bella' AND owner_id=(SELECT user_id FROM Users WHERE username='carol123')), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
       ((SELECT dog_id FROM Dogs WHERE name='Charlie' AND owner_id=(SELECT user_id FROM Users WHERE username='alice123')), '2025-06-11 15:00:00', 60, 'City Park', 'open'),
@@ -76,12 +76,12 @@ app.get('/api/Dogs', async (req, res) => {
   }
 });
 
-// /api/walkrequests/open
-app.get('/api/walkrequests/open', async (req, res) => {
+// /api/WalkRequests/open
+app.get('/api/WalkRequests/open', async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT wr.request_id, d.name AS dog_name, wr.requested_time, wr.duration_minutes, wr.location, u.username AS owner_username
-      FROM walkrequests wr
+      FROM WalkRequests wr
       JOIN Dogs d ON wr.dog_id = d.dog_id
       JOIN Users u ON d.owner_id = u.user_id
       WHERE wr.status = 'open'
@@ -102,7 +102,7 @@ app.get('/api/walkers/summary', async (req, res) => {
         AVG(wr.rating) AS average_rating,
         (
           SELECT COUNT(*)
-          FROM walkrequests wq
+          FROM WalkRequests wq
           WHERE wq.status = 'completed'
             AND wq.accepted_walker_id = u.user_id
         ) AS completed_walks
