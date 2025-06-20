@@ -98,7 +98,10 @@
           }
         }
         async function loadDogs() {
-          try 
+          try {
+            const res = await fetch('/api/users/mydogs', { credentials: 'include' });
+            if 
+          }
         }
 
         async function submitWalkRequest() {
