@@ -212,6 +212,7 @@ function logout(){
 
 }
 
+// add DOM
 document.addEventListener('DOMContentLoaded', function() {
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
