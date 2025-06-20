@@ -4,12 +4,14 @@ require('dotenv').config();
 
 const app = express();
 
+// Add
 const expressSession = require('express-session');
 
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
+// Add
 app.use(expressSession({
   secret: 'yourSecret', // use a secure secret in production
   resave: false,
