@@ -130,15 +130,6 @@
       }
     }).mount('#app');
   </script>
-
-  <script>
-    document.getElementById('logoutBtn').addEventListener('click', async function() {
-    await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
-    document.cookie = "connect.sid=; Max-Age=0; path=/"; 
-    window.location.href = 'index.html';
-  });
-</script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
