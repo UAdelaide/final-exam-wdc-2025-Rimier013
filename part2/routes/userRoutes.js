@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
       WHERE username = ? AND password_hash = ?
     `, [username, password]);
 
-    console.log('login request', username, password);
+    console.log('database user', username, password);
 
 
     if (rows.length === 0) {
