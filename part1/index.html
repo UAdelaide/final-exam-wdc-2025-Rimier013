@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog of the Day - Accessibility/Usability Bad Example</title>
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    /* Intentionally poor contrast, tiny text, weird colors */
+    body { background: #000; color: #333; font-size: 10px; font-family: cursive; }
+    .dog-card {
+      background: #FF00FF;
+      color: #00FFFF;
+      border: 10px dashed lime;
+      padding: 5px;
+      margin: 20px;
+      box-shadow: 5px 5px 0px yellow;
+      width: 220px;
+      display: flex; flex-direction: column; align-items: center;
+      cursor: pointer;
+    }
+    /* Everything clickable! */
+    .dog-card > * { cursor: pointer; }
+    /* No focus styles for tabbing */
+    *:focus { outline: none !important; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="dog-card" tabindex="0">
+      <h1>{{ title }}</h1>
+      <!-- No alt text! -->
+      <img :src="dogImage" style="width:200px;height:200px;filter:blur(2px) grayscale(80%) contrast(50%);border: 5px solid orange;">
+      <!-- Overwhelming information dump, abbreviation, emoji-only text, non-standard buttons -->
+      <p>
+        Breed: Pyrenean Mountain Dog
+        <br>
+        Nickname: &nbsp;Pyro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
+        Lifespan: idk, probably long?
+        <br>
+        <span title="Very long info dump with no structure or headings and no ARIA!">
+          This breed is known for blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+        </span>
+      </p>
+      <button @click="loadDog" style="background: none; color: inherit; border: none; text-decoration: underline; font-size: 8px;">CLICK ME TO GET ANOTHER DOG!!!</button>
+      <!-- No instructions, no feedback, cryptic tiny button -->
+      <button @click="alert('?')" style="font-size:8px;background:lime;">???</button>
+    </div>
+    <!-- Random text everywhere -->
+    <div style="position:absolute; top:0; left:50%; font-size:9px; color: red; transform:rotate(-17deg);">DOG 4EVER!</div>
+    <div style="position:absolute; right:10px; bottom:10px; color:blue;font-size:7px;">Made by <span style="color:yellow;">nobody</span></div>
+  </div>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          title: 'Dog of the Day',
+          dogImage: 'https://images.dog.ceo/breeds/pyrenees/n02111500_4731.jpg'
+        }
+      },
+      methods: {
+        async loadDog() {
+          // No loading spinner, no error handling, just chaos
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
