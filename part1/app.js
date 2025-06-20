@@ -68,7 +68,7 @@ app.get('/api/dogs', async (req, res) => {
     const [rows] = await pool.query(`
       SELECT d.name AS dog_name, d.size, u.username AS owner_username
       FROM dogs d
-      JOIN users u ON d.owner_id = u.user_id
+      JOIN Users u ON d.owner_id = u.user_id
     `);
     res.json(rows);
   } catch (err) {
@@ -83,7 +83,7 @@ app.get('/api/walkrequests/open', async (req, res) => {
       SELECT wr.request_id, d.name AS dog_name, wr.requested_time, wr.duration_minutes, wr.location, u.username AS owner_username
       FROM walkrequests wr
       JOIN dogs d ON wr.dog_id = d.dog_id
-      JOIN users u ON d.owner_id = u.user_id
+      JOIN Users u ON d.owner_id = u.user_id
       WHERE wr.status = 'open'
     `);
     res.json(rows);
@@ -106,7 +106,7 @@ app.get('/api/walkers/summary', async (req, res) => {
           WHERE wq.status = 'completed'
             AND wq.accepted_walker_id = u.user_id
         ) AS completed_walks
-      FROM users u
+      FROM Users u
       LEFT JOIN walkratings wr ON u.user_id = wr.walker_id
       WHERE u.role = 'walker'
       GROUP BY u.user_id
