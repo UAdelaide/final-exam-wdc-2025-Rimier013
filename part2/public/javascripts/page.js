@@ -211,3 +211,43 @@ function logout(){
     xmlhttp.send();
 
 }
+
+// public/javascripts/page.js
+
+document.addEventListener('DOMContentLoaded', function() {
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const loginError = document.getElementById('loginError');
+
+      loginError.textContent = ''; // Clear any previous error
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          // Redirect based on role
+          if (data.role === 'owner') {
+            window.location.href = 'owner-dashboard.html';
+          } else if (data.role === 'walker') {
+            window.location.href = 'walker-dashboard.html';
+          } else {
+            loginError.textContent = 'Unknown user role.';
+          }
+        } else {
+          loginError.textContent = data.message || 'Login failed';
+        }
+      } catch (err) {
+        loginError.textContent = 'Server error';
+      }
+    });
+  }
+});
