@@ -83,6 +83,7 @@ router.post('/login', async (req, res) => {
     // Respond with role for frontend redirection
     res.json({ role: rows[0].role });
   } catch (error) {
+    console.error('Error is:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
