@@ -32,11 +32,11 @@ async function insertTestData() {
     // Dogs
     await conn.query(`
       INSERT IGNORE INTO dogs (owner_id, name, size) VALUES
-      ((SELECT user_id FROM users WHERE username = 'alice123'), 'Max', 'medium'),
-      ((SELECT user_id FROM users WHERE username = 'carol123'), 'Bella', 'small'),
-      ((SELECT user_id FROM users WHERE username = 'alice123'), 'Charlie', 'large'),
-      ((SELECT user_id FROM users WHERE username = 'eveowner'), 'Daisy', 'medium'),
-      ((SELECT user_id FROM users WHERE username = 'carol123'), 'Rocky', 'small')
+      ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
+      ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
+      ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Charlie', 'large'),
+      ((SELECT user_id FROM Users WHERE username = 'eveowner'), 'Daisy', 'medium'),
+      ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Rocky', 'small')
     `);
 
     // Walk requests
