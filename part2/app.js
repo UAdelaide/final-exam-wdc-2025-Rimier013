@@ -10,6 +10,13 @@ const expressSession = require('express-session');
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use(expressSession({
+  secret: 'yourSecret', // use a secure secret in production
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(express.json());
+
 // Routes
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
