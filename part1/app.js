@@ -10,7 +10,7 @@ const dbConfig = {
   host: 'localhost',
   user: 'root',
   password: '',// Change to your MySQL password
-  database: 'dogDogWalkServicewalks'
+  database: 'DogWalkService'
 };
 
 let pool;
