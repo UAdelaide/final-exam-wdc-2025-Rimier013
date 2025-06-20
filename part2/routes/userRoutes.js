@@ -55,13 +55,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// routes/userRoutes.js
 
-const express = require('express');
-const router = express.Router();
-const db = require('../models/db');
-
-// Login route
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -76,8 +70,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-
 
 
 module.exports = router;
