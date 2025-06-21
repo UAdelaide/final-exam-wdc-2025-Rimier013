@@ -117,4 +117,6 @@ router.get('/mydogs', async (req, res) => {
   console.log('Session user:', req.session.user);
 });
 
+
+
 module.exports = router;
