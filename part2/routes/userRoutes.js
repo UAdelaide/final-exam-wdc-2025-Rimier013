@@ -113,6 +113,7 @@ router.get('/mydogs', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch dogs' });
   }
+  console.log('Session user:', req.session.user);
 });
 
 module.exports = router;
