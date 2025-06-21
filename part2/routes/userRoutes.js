@@ -100,7 +100,6 @@ router.post('/logout', (req, res) => {
   });
 });
 
-
 router.get('/mydogs', async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: 'Not logged in' });
@@ -115,8 +114,7 @@ router.get('/mydogs', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch dogs' });
   }
-});
-
   console.log('Session user:', req.session.user);
+});
 
 module.exports = router;
