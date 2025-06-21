@@ -117,7 +117,7 @@ router.get('/mydogs', async (req, res) => {
   console.log('Session user:', req.session.user);
 });
 
-router.get('/dog'
+router.get('/dogs', (req, res)
 
 );
 
