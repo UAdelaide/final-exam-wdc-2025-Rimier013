@@ -66,9 +66,23 @@
       "https://images.dog.ceo/breeds/terrier-toy/n02087046_7400.jpg"
     ];
 
-
-
-
+    fetch('/api/dogs')
+      .then(res => res.json())
+      .then(dogs => {
+        const tbody = document.querySelector('#dogsTable tbody');
+        dogs.forEach((dog, i) => {
+        const imgUrl = dogImages[i % dogImages.length];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${dog.dog_id || ''}</td>
+          <td>${dog.dog_name || dog.name || ''}</td>
+          <td>${dog.size || ''}</td>
+          <td>${dog.owner_id || ''}</td>
+          <td><img src="${imgUrl}" alt="dog photo" style="width:80px;height:60px;object-fit:cover;"></td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
   </script>
 
 
