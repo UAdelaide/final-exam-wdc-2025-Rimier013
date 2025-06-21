@@ -117,8 +117,8 @@ router.get('/mydogs', async (req, res) => {
   console.log('Session user:', req.session.user);
 });
 
-router.get('/dogs', (req, res)
+router.get('/dogs', (req, res) => {
 
-);
+});
 
 module.exports = router;
