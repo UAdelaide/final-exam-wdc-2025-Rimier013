@@ -40,7 +40,12 @@
   <script>
     const { createApp, ref, onMounted } = Vue;
 
-    // Add
+    // Add 16
+    async function getCurrentUser() {
+      const res = await fetch('/api/users/me', { credentials: 'include' });
+      if (!res.ok) throw new Error('Not logged in');
+      return await res.json(); // Expects { user_id, username, ... }
+    }
 
     createApp({
       setup() {
