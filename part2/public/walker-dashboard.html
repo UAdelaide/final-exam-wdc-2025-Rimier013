@@ -73,6 +73,7 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ walker_id: currentUser.user_id })
+              credentials: 'include'
             });
             const result = await res.json();
 
