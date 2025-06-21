@@ -9,6 +9,8 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
+module.exports = pool;
+
 // async function getUserByUsernameAndPassword(username, password) {
 //   const [rows] = await pool.query(
 //     'SELECT * FROM Users WHERE username = ? AND password_hash = ?', [username, password]
@@ -21,4 +23,3 @@ const pool = mysql.createPool({
 //   pool
 // };
 
-module.exports = pool;
