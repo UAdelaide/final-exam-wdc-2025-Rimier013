@@ -44,5 +44,46 @@
   </script>
   <script src="/javascripts/page.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <table class="table" id="dogsTable">
+  <thead>
+    <tr>
+      <th>Dog ID</th>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Owner ID</th>
+      <th>Photo</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+  // List of 5 random images, rotate through if more than 5 dogs
+  const dogImages = [
+    "https://images.dog.ceo/breeds/spitz-japanese/beet-005.jpg",
+    "https://images.dog.ceo/breeds/gaddi-indian/Gaddi.jpg",
+    "https://images.dog.ceo/breeds/shiba/shiba-13.jpg",
+    "https://images.dog.ceo/breeds/groenendael/n02105056_6338.jpg",
+    "https://images.dog.ceo/breeds/terrier-toy/n02087046_7400.jpg"
+  ];
+
+  // Fetch dogs and populate the table
+  fetch('/api/dogs')
+    .then(res => res.json())
+    .then(dogs => {
+      const tbody = document.querySelector('#dogsTable tbody');
+      dogs.forEach((dog, i) => {
+        const imgUrl = dogImages[i % dogImages.length];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${dog.dog_id || ''}</td>
+          <td>${dog.dog_name || dog.name || ''}</td>
+          <td>${dog.size || ''}</td>
+          <td>${dog.owner_id || ''}</td>
+          <td><img src="${imgUrl}" alt="dog photo" style="width:80px;height:60px;object-fit:cover;"></td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+</script>
 </body>
 </html>
